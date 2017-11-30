@@ -31,6 +31,8 @@ cat fixtures/add_product.json | http post http://localhost:1337/cart/my-cart-id/
 ```
 
 2. all state changes, quantity change, delete product, add product, add voucher, add promotion
+Its at this point that you would decide from a UX pov if voucher/discount services woudl be called on every state change
+OR at a point after setting up the cart. The voucer/discount service should be optimised as a seperate project to be as efficient and light as possible
 
 ```
 cat fixtures/thin-cart.json | http post http://localhost:1337/cart/my-cart-id
@@ -38,6 +40,7 @@ cat fixtures/fat-cart.json | http post http://localhost:1337/cart/my-cart-id
 ```
 
 3. user is DONE, presses pay now
+Its here that one would pass the completed order to a validation service that would check for actual validity of product (and availability) and then pass it on to the payment service
 
 ```
 http post http://localhost:1337/cart/my-cart-id/done
@@ -57,9 +60,9 @@ export SNAPCART_SHARED_SECRET_TOKEN='somethign really complicated and long'
 __Sign your products__
 
 ```
-apistar sign_product 'name of product' 25.55
+cargo sign_product 'name of product' 25.55
   eyJuYW1lIjoibmFtZSBvZiBwcm9kdWN0IiwicHJpY2UiOiIyNS41NSJ9.RpSTtPDsKNcYlqirhynYS57xTtg
 
-apistar unsign_product 'eyJuYW1lIjoibmFtZSBvZiBwcm9kdWN0IiwicHJpY2UiOiIyNS41NSJ9.RpSTtPDsKNcYlqirhynYS57xTtg'
+cargo unsign_product 'eyJuYW1lIjoibmFtZSBvZiBwcm9kdWN0IiwicHJpY2UiOiIyNS41NSJ9.RpSTtPDsKNcYlqirhynYS57xTtg'
   {'name': 'name of product', 'price': '25.55'}
 ```
