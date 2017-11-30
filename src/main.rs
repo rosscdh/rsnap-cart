@@ -8,13 +8,13 @@ extern crate mongodb;
 #[macro_use]
 extern crate log;
 
-use sapper::SapperApp;
-
-use bson::Bson;
 use mongodb::{Client, ThreadedClient};
 use mongodb::db::ThreadedDatabase;
 
+use sapper::SapperApp;
 
+mod persist;
+use persist::Persist;
 mod cart;
 use cart::Cart;
 // mod products;
@@ -23,10 +23,10 @@ use cart::Cart;
 pub fn main() {
     env_logger::init().unwrap();
 
-    let client = Client::connect("localhost", 27017)
+    let mongo_client = Client::connect("localhost", 27017)
         .expect("Failed to initialize standalone mongodb client.");
 
-    let coll = client.db("snap_cart").collection("cart");
+    let db = mongo_client.db("snap_cart").collection("cart");
 
     let mut sapp = SapperApp::new();
     sapp.address("127.0.0.1")

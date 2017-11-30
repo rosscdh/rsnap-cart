@@ -4,8 +4,9 @@ use sapper::Request;
 use sapper::Response;
 use sapper::SapperRouter;
 
-use serde_json;
+use persist::Persist;
 
+use serde_json;
 use std::str;
 
 #[derive(Clone)]
