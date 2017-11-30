@@ -24,23 +24,23 @@ docker-compose up
 
 ```
 create a cart:
-cat fixtures/basic.json | http post http://localhost:8080/cart/my-cart-id
+cat fixtures/basic.json | http post http://localhost:1337/cart/my-cart-id
 OR
 add a product
-cat fixtures/add_product.json | http post http://localhost:8080/cart/my-cart-id/products
+cat fixtures/add_product.json | http post http://localhost:1337/cart/my-cart-id/products
 ```
 
 2. all state changes, quantity change, delete product, add product, add voucher, add promotion
 
 ```
-cat fixtures/thin-cart.json | http post http://localhost:8080/cart/my-cart-id
-cat fixtures/fat-cart.json | http post http://localhost:8080/cart/my-cart-id
+cat fixtures/thin-cart.json | http post http://localhost:1337/cart/my-cart-id
+cat fixtures/fat-cart.json | http post http://localhost:1337/cart/my-cart-id
 ```
 
 3. user is DONE, presses pay now
 
 ```
-http post http://localhost:8080/cart/my-cart-id/done
+http post http://localhost:1337/cart/my-cart-id/done
 ```
 
 
