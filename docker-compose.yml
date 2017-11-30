@@ -1,0 +1,13 @@
+web:
+  build: .
+  ports:
+    - "1337:1337"
+  volumes:
+    - ./:/usr/src/app
+  links:
+    - db
+
+db:
+  image: mongo:3.0.2
+  ports:
+    - "27017:27017"
